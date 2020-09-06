@@ -1,0 +1,67 @@
+{% include 'myapp/main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+  <div class="col-12" style="display: flex; justify-content: center;">
+    <h2>All of finished todo</h2>
+  </div>
+</div>
+<div class="container-fluid">
+  <form method="get">
+    <div class="row">
+      {% for field in filterTabel.form %}
+        <div class="col-4 col-sm-6">
+          {{field.label}} : 
+          {{field}}
+        </div>
+      {% endfor %}
+    </div>
+  <button class="btn btn-primary" type="submit">Search</button>
+    <a href="?">Clear</a>
+</form>
+</div>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Tags</th>
+        <th scope="col">From</th>
+        <th scope="col">To</th>
+        <th scope="col">Days</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for todo in finishTodos %}
+      <tr>
+        <td>{{todo.name}}</td>
+        <td>
+         
+        </td>
+        <td>{{todo.createdAt}}</td>
+        <td>{{todo.endAt}}</td>
+      </tr>
+      {% endfor  %}
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if finishTodos.has_previous %}
+            <a href="?page=1&tags={{tags}}">&laquo; first</a>
+            <a href="?page={{ finishTodos.previous_page_number }}&tags={{tags}}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ finishTodos.number }} of {{ finishTodos.paginator.num_pages }}.
+        </span>
+
+        {% if finishTodos.has_next %}
+            <a href="?page={{ finishTodos.next_page_number }}&tags={{tags}}">next</a>
+            <a href="?page={{ finishTodos.paginator.num_pages }}&tags={{tags}}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+  <a class="btn btn-primary" href="{% url 'home'%}">Back To todos</a>
+{% endblock %}

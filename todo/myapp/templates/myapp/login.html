@@ -1,0 +1,21 @@
+{% extends 'myapp/main.html' %}
+
+
+{% block content %}
+    {% if errors != None %}
+        {% for error in errors %}
+            <h3>{{error}}</h3>
+        {% endfor %}
+    {% endif %}
+    <form method="POST" action="">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" id="">
+        <input type="password" name="password" placeholder="password" id="">
+        <input type="submit" class="btn btn-info btn-sm" value="LOG IN">
+    </form>
+
+    <p>Don't have account  ??
+        <a href="{% url  'register'%}" class="tex-primary">SIGN UP</a>
+    </p>
+    
+{% endblock  %}

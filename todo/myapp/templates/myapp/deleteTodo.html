@@ -1,0 +1,14 @@
+{% extends 'myapp/main.html' %}
+
+{% block content%}
+<div>
+    <h1>Are you sure you want to delete it</h1>
+    <h3>{{todo}}</h3>
+    <a href="{% url 'home'%}" >Cancel</a>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <input class="btn btn-danger btn-sm" type="submit" value="DELETE">
+    </form>
+</div>
+
+{% endblock %}

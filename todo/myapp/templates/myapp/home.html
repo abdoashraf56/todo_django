@@ -1,0 +1,82 @@
+{% extends 'myapp/main.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'myapp/messages.html'%}
+<div class="row card-body">
+    <div class="col-md-2 col-sm-12">
+        <h4>Tags</h4>
+        <div id="list-example" class="list-group">
+            <ul class="nav flex-column nav-pills bg-light">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">All</a>
+                </li>
+                {% for tag in tags %}
+                <li class="nav-item">
+                    {% if tag.name == filter %}
+                    <a class="nav-link active" href="{% url 'home' %}?filter={{tag.name}}}">
+                        {{tag.name}}
+                    </a>
+                    {% else %}
+                    <a class="nav-link" href="{% url 'home' %}?filter={{tag.name}}">
+                        {{tag.name}}
+                    </a>
+                    {% endif %}
+                </li>
+                {% endfor %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'finish' %}">Finished</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="col-md-5 col-sm-12" style="display: flex; align-items: center;">
+        <ul>
+            {% for todo in todos %}
+            <form method="POST" action="{% url 'finish' %}" id="{{todo.id}}">
+                {% csrf_token %}
+                <h4>
+                    <span>
+                        <input type="hidden" name="id" value="{{todo.id}}">
+                        <input type="checkbox" name="" id="" data-id="{{todo.id}}">
+                        <a href="{% url 'updateTodo' todo.id %}">U</a>
+                        <a class="text-danger" href="{% url 'deleteTodo' todo.id %}">D</a>
+                    </span>
+
+                    {{todo.name}}</h4>
+            </form>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="col-md-5 col-sm-12">
+        <h3>Create New Tag</h3>
+        <form method="POST" action="{% url 'postTag'%}" class="card-body">
+            {% csrf_token %}
+            {{tagForm}}
+            <input type="submit" class="btn btn-info btn-sm" value="Create">
+        </form>
+
+        <h3>Create New Todo</h3>
+        <form method="POST" action="{% url 'postTodo'%}" class="card-body">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="id_name">Todo</label>
+                <input type="text" class="form-control" 
+                id="id_name" name="name"
+                placeholder="write you todo where ...">
+            </div>
+            <div class="form-group">
+                {{ todoForm.tags }}
+            </div>
+            <input type="submit" class="btn btn-info btn-sm" value="Create">
+        </form>
+    </div>
+</div>
+
+
+<script src="{% static 'myapp/js/site.js' %}"></script>
+{% endblock %}

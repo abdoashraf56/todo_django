@@ -1,0 +1,11 @@
+{% load static %}
+{% if messages %}
+{% for message in messages %}
+<div {% if message.tags == 'error' %} class="card text-white bg-danger" {% elif message.tags == 'success'%}
+    class="card text-white bg-success" {% endif %}>
+    <div class="card-body">
+        <p class="card-text">{{message}}</p>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
