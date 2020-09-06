@@ -24,3 +24,11 @@ python manage.py runserver
 
 ### Prerequisites
 have Python 3. > on your system
+
+
+### Images of the application 
+![Home Page](https://drive.google.com/uc?export=view&id=13va1_enZlXf8zQjmXC_mvDWnmHVaxt2u)
+![Finished Page](https://drive.google.com/uc?export=view&id=1TBYJdQgTCJv-T7uwMLtDpZUxKI3vSg0J)
+![Update Page](https://drive.google.com/uc?export=view&id=1uDAwFsy2FeNsXH4iN45RbZvWxbjUp4tM)
+![Delete Page](https://drive.google.com/uc?export=view&id=1m05HsLjqoU3L-NOxGUWwp-pRMWKuG_r6)
+
